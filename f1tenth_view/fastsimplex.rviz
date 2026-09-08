@@ -124,40 +124,12 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        ego_racecar/back_left_wheel:
+        base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        ego_racecar/back_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ego_racecar/base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ego_racecar/front_left_hinge:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        ego_racecar/front_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ego_racecar/front_right_hinge:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        ego_racecar/front_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ego_racecar/laser_model:
+        laser_model:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -290,7 +262,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 0; 0; 0
-    Fixed Frame: ego_racecar/base_link
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -348,10 +320,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.2177603244781494
+      Pitch: 1.1627603769302368
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.2924916744232178
+      Yaw: 3.3024919033050537
     Saved: ~
 Window Geometry:
   Displays:

@@ -26,6 +26,9 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=private \
     ros-humble-rviz2 \
     ros-humble-grid-map-rviz-plugin \
     ros-humble-joy \
+    ros-humble-nav2-msgs \
+    ros-humble-nav2-rviz-plugins \
+    ros-humble-slam-toolbox \
     x11-xserver-utils \
     mesa-utils \
     libgl1-mesa-dri \
@@ -34,6 +37,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=private \
     && apt-get dist-upgrade -y
 
 #COPY client_config.xml /client_config.xml
-ENV FASTDDS_DEFAULT_PROFILES_FILE=/f1tenth_view/client_config.xml
+ENV FASTRTPS_DEFAULT_PROFILES_FILE=/f1tenth_view/client_config.xml
 
 ENTRYPOINT ["bash", "-c", "source /opt/ros/humble/setup.bash && ros2 run rviz2 rviz2"]

@@ -1,25 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <dds>
     <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+
+        <!-- 1. Define UDP, SHM, and TCP Transports -->
         <transport_descriptors>
             <transport_descriptor>
                 <transport_id>udp_transport</transport_id>
                 <type>UDPv4</type>
-                <maxMessageSize>1350</maxMessageSize>
+                <non_blocking_send>true</non_blocking_send>
             </transport_descriptor>
             <transport_descriptor>
                 <transport_id>shm_transport</transport_id>
                 <type>SHM</type>
-            </transport_descriptor>
+	</transport_descriptor>
+	             <transport_descriptor>
+                             <transport_id>tcp_transport</transport_id>
+                             <type>TCPv4</type>
+                             <!-- Bypass the 100 endpoint limit -->
+                             <max_logical_port>65535</max_logical_port>
+                             <logical_port_range>65535</logical_port_range>
+                             <listening_ports>
+                                 <port>0</port>
+                             </listening_ports>
+                         </transport_descriptor>
+
         </transport_descriptors>
 
         <participant profile_name="super_client_profile" is_default_profile="true">
             <rtps>
+                <!-- 2. Bind the transports to this participant and disable defaults -->
                 <userTransports>
                     <transport_id>udp_transport</transport_id>
                     <transport_id>shm_transport</transport_id>
+                    <transport_id>tcp_transport</transport_id>
                 </userTransports>
                 <useBuiltinTransports>false</useBuiltinTransports>
+
+                <!-- 3. Force incoming topic data (like /map) to use TCP -->
+		<!--<defaultUnicastLocatorList>
+                    <locator>
+                        <tcpv4>
+                            <address>0.0.0.0</address>
+                            <physical_port>0</physical_port>
+                        </tcpv4>
+                    </locator>
+		</defaultUnicastLocatorList> -->
+
+                <!-- 4. Your existing Discovery config remains exactly as-is -->
                 <builtin>
                     <discovery_config>
                         <discoveryProtocol>SUPER_CLIENT</discoveryProtocol>
@@ -28,7 +55,8 @@
                                 <metatrafficUnicastLocatorList>
                                     <locator>
                                         <udpv4>
-                                            <address>${CAR_ADDR}</address>
+						<address>rtis-jetson</address>
+						<!--<address>10.153.16.1</address>-->
                                             <port>11811</port>
                                         </udpv4>
                                     </locator>
@@ -39,18 +67,5 @@
                 </builtin>
             </rtps>
         </participant>
-
-        <data_writer profile_name="default_datawriter_profile" is_default_profile="false">
-            <qos>
-                <publishMode>
-                    <kind>ASYNCHRONOUS</kind>
-                </publishMode>
-            </qos>
-            <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
-        </data_writer>
-
-        <data_reader profile_name="default_datareader_profile" is_default_profile="true">
-            <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
-        </data_reader>
     </profiles>
 </dds>

@@ -19,6 +19,7 @@ services:
       # The oibaf PPA in the Dockerfile provides latest drivers.
       #- LIBGL_ALWAYS_SOFTWARE=1
       # ROS Discovery
+      - CAR_ADDR=${CAR_ADDR}
       - ROS_DISCOVERY_SERVER=${CAR_ADDR}:11811
     stdin_open: true
     tty: true
